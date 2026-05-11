@@ -207,6 +207,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   padding-bottom: 0;
 }
 
+/* Match bloomsbury.css form .submit-row input styling for <button type="submit"> */
+#content-wrapper form .submit-row button[type="submit"] {
+  width: auto;
+  padding: 0.5em;
+  background: #EE6809;
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 3px;
+  border: none;
+  font: inherit;
+}
+#content-wrapper form .submit-row button[type="submit"]:hover {
+  background: #ccc;
+  color: #051d48;
+}
+
 /* How it works: strip of cards; number + title always visible, body toggles on click */
 #content-wrapper .process-diagram.process-diagram--strip {
   display: grid;
@@ -242,11 +260,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   list-style: none;
   cursor: pointer;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 0.35rem;
-  padding: 0.55rem 0.65rem;
+  padding: 0.55rem 1.75rem 0.55rem 0.65rem;
   box-sizing: border-box;
   user-select: none;
+  position: relative;
+  text-align: center;
 }
 #content-wrapper .process-diagram--strip details.process-strip-card > summary::-webkit-details-marker {
   display: none;
@@ -256,9 +277,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 #content-wrapper .process-diagram--strip details.process-strip-card > summary::after {
   content: "+";
-  margin-left: auto;
+  position: absolute;
+  right: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
   flex-shrink: 0;
-  align-self: center;
   font-weight: 700;
   font-size: 0.85rem;
   line-height: 1.25;
@@ -267,6 +290,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 #content-wrapper .process-diagram--strip details.process-strip-card[open] > summary::after {
   content: "\2212";
+  transform: translateY(-50%);
 }
 #content-wrapper .process-diagram--strip .process-strip-card__num {
   font-weight: 700;
@@ -283,7 +307,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   line-height: 1.25;
   font-weight: 700;
   color: #032048;
-  text-align: left;
+  text-align: center;
 }
 #content-wrapper .process-diagram--strip .process-strip-card__body {
   font-size: 0.875rem;
@@ -291,6 +315,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   color: #032048;
   padding: 0 0.65rem 0.65rem;
   border-top: 1px solid rgba(3, 32, 72, 0.12);
+  text-align: center;
 }
 #content-wrapper .process-diagram--strip .process-strip-card__body p {
   margin: 0.45em 0 0.4em;
@@ -431,7 +456,7 @@ html { scroll-behavior: smooth; }
         <li><a href="../research.html">Research</a></li>
         <li><a href="../tools.html">Tools</a>
           <ul>
-            <li><a class="current" href="brokercheck.html">BrokerCheck</a></li>
+            <li><a class="current" href="brokercheck.html"><strong>BrokerCheck</strong></a></li>
             <li><a href="thegiving-gauge.html">The Giving Gauge</a></li>
           </ul>
         </li>
@@ -442,8 +467,8 @@ html { scroll-behavior: smooth; }
     </div>
     <!-- end subnav-col -->
     <div class="col content-col">
-      <div class="breadcrumbs"><a href="../../index.html">Home</a> <a href="../../resources.html">Resources</a> <a href="../tools.html">Tools</a> BrokerCheck</div>
-      <h1>BrokerCheck</h1>
+      <div class="breadcrumbs"><a href="../../index.html">Home</a> <a href="../../resources.html">Resources</a> <a href="../tools.html">Tools</a> <strong>BrokerCheck</strong></div>
+      <h1><strong>BrokerCheck</strong></h1>
       <p class="tagline">Get your free personalised report from Bloomsbury’s qualified advisers and accredited fiduciaries</p>
       <p>Upload your broker statement and we'll go through it properly – fees, performance, diversification, tax structure, and any signs that the portfolio has been built around the broker's interests rather than yours. No appointment needed, no obligation, and no charge.</p>
       <div class="brokercheck-intro">
@@ -456,7 +481,7 @@ html { scroll-behavior: smooth; }
             <li>Plain-English report.</li>
             <li>Completely confidential.</li>
           </ul>
-          <p class="brokercheck-intro__cta"><a href="#brokercheck-form" class="button">Get your free BrokerCheck</a></p>
+          <p class="brokercheck-intro__cta"><a href="#brokercheck-form" class="button">Get your free <strong>BrokerCheck</strong></a></p>
         </div>
         <figure class="report-preview" aria-roledescription="Sample BrokerCheck report preview">
           <div class="report-preview__viewport">
@@ -474,7 +499,7 @@ html { scroll-behavior: smooth; }
         </figure>
       </div>
       <h2 class="divider" id="how-it-works">How it works</h2>
-      <p>Bloomsbury’s BrokerCheck is straightforward. No meetings, no lengthy questionnaires. All we need is your portfolio statement – Our qualified advisers and accredited investment fiduciaries will take care of the rest.</p>
+      <p>Bloomsbury’s <strong>BrokerCheck</strong> is straightforward. No meetings, no lengthy questionnaires. All we need is your portfolio statement – Our qualified advisers and accredited investment fiduciaries will take care of the rest.</p>
       <div class="process-diagram process-diagram--strip">
         <details class="process-strip-card">
           <summary class="process-strip-card__summary">
@@ -505,7 +530,7 @@ html { scroll-behavior: smooth; }
         </details>
       </div>
       <!-- end process-diagram -->
-      <h2 id="brokercheck-form" class="brokercheck-form-heading">Get your free BrokerCheck report</h2>
+      <h2 id="brokercheck-form" class="brokercheck-form-heading">Get your free <strong>BrokerCheck</strong> report</h2>
       <form action="/cgi-bin/formmail.php" method="post">
         <input type="hidden" name="recipient" value="philip.stevenson@bloomsbury.co.nz,alison@webweaver.co.nz,lauren.teague@bloomsbury.co.nz" />
         <input type="hidden" name="subject" value="Bloomsbury initial consultation enquiry" />
@@ -534,11 +559,11 @@ html { scroll-behavior: smooth; }
             <ul class="checkboxes">
               <li>
                 <input name="terms" id="terms" type="checkbox" value="Terms and Conditions">
-                <label for="terms">I understand and agree to Bloomsbury's terms and conditions</label>
+                <label for="terms">I understand and agree to Bloomsbury's <a href="https://bloomsbury.co.nz/terms-conditions.html">terms and conditions</a></label>
               </li>
               <li>
                 <input name="disclosure" id="disclosure" type="checkbox" value="Disclosure Statement">
-                <label for="disclosure">I understand and have read Bloomsbury's disclosure statement</label>
+                <label for="disclosure">I understand and have read Bloomsbury's <a href="https://bloomsbury.co.nz/disclosure.html">disclosure statement</a></label>
               </li>
             </ul>
           </div>
@@ -549,12 +574,12 @@ html { scroll-behavior: smooth; }
           <!-- Google reCAPTCHA -->
           <div class="g-recaptcha" data-sitekey="6LfNOIUsAAAAANgssRDluMl8zn-4inff8ImW1fdA"></div>
           <br/>
-          <input type="submit" value="Request your free BrokerCheck" />
+          <button type="submit">Request your free <strong>BrokerCheck</strong></button>
           <!-- end submit-row -->
         </fieldset>
             <p>Free · Confidential · No obligation</p>
 
-<p class="disclaimer"><small><em>Bloomsbury Associates reserves the right to refrain from providing a BrokerCheck report. If a BrokerCheck report is provided, we endeavour to produce it in 2-3 weeks, however reports may take longer based on availability.</em></small></p>
+<p class="disclaimer"><small><em>Bloomsbury Associates reserves the right to refrain from providing a <strong>BrokerCheck</strong> report. If a <strong>BrokerCheck</strong> report is provided, we endeavour to produce it in 2-3 weeks, however reports may take longer based on availability.</em></small></p>
       </form>
     </div>
     <!-- end content-col --> 
