@@ -95,6 +95,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   line-height: 1.35;
   color: #FF6600;
 }
+/* Same BrokerCheck treatment as elsewhere: bold Broker, italic Check (tagline is all-italic) */
+#content-wrapper .col.content-col > p.tagline .brokercheck-mark {
+  font-style: normal;
+}
+#content-wrapper .col.content-col > p.tagline .brokercheck-mark strong {
+  font-weight: 700;
+}
+#content-wrapper .col.content-col > p.tagline .brokercheck-mark em {
+  font-style: italic;
+}
 
 /* Tighter intro: less gap between bullet list / top CTA and “How it works” */
 #content-wrapper .brokercheck-intro__text > ul:first-of-type {
@@ -456,7 +466,7 @@ html { scroll-behavior: smooth; }
         <li><a href="../research.html">Research</a></li>
         <li><a href="../tools.html">Tools</a>
           <ul>
-            <li><a class="current" href="brokercheck.html"><strong>BrokerCheck</strong></a></li>
+            <li><a class="current" href="brokercheck.html"><strong>Broker<em>Check</em></strong></a></li>
             <li><a href="thegiving-gauge.html">The Giving Gauge</a></li>
           </ul>
         </li>
@@ -467,21 +477,20 @@ html { scroll-behavior: smooth; }
     </div>
     <!-- end subnav-col -->
     <div class="col content-col">
-      <div class="breadcrumbs"><a href="../../index.html">Home</a> <a href="../../resources.html">Resources</a> <a href="../tools.html">Tools</a> <strong>BrokerCheck</strong></div>
-      <h1><strong>BrokerCheck</strong></h1>
-      <p class="tagline">Get your free personalised report from Bloomsbury’s qualified advisers and accredited fiduciaries</p>
-      <p>Upload your broker statement and we'll go through it properly – fees, performance, diversification, tax structure, and any signs that the portfolio has been built around the broker's interests rather than yours. No appointment needed, no obligation, and no charge.</p>
+      <div class="breadcrumbs"><a href="../../index.html">Home</a> <a href="../../resources.html">Resources</a> <a href="../tools.html">Tools</a> <strong>Broker<em>Check</em></strong></div>
+      <h1><strong>Broker<em>Check</em></strong></h1>
+      <p class="tagline">Bloomsbury’s <span class="brokercheck-mark"><strong>Broker<em>Check</em></strong></span> is a free portfolio analysis report for brokerage clients, prepared for you by Accredited Investment Fiduciaries (AIF©)</p>
+      <p>Upload your broker statement and we'll go through it properly – fees, performance, diversification, tax structure, and any signs that the portfolio has been built around the broker's interests rather than yours. No appointment needed, no obligation [to act], and no charge.</p>
       <div class="brokercheck-intro">
         <div class="brokercheck-intro__text">
           <ul>
-            <li>Reviewed by qualified, CEFEX-certified advisers.</li>
-            <li>We are independent – we don’t earn from trading and don’t take commissions.</li>
-            <li>Free, detailed analysis – tailored for you.</li>
-            <li>No obligation now or in the future.</li>
-            <li>Plain-English report.</li>
+            <li>Reviewed by qualified, experienced advisers at a CEFEX-certified advisory firm.</li>
+            <li>Bloomsbury Associates are an independent adviser - we don’t take commissions or earn money from trading.</li>
+            <li><strong>Broker<em>Check</em></strong> is a free, detailed analysis of your broker portfolio.</li>
+            <li>No obligation to act on the report now or in the future.</li>
             <li>Completely confidential.</li>
           </ul>
-          <p class="brokercheck-intro__cta"><a href="#brokercheck-form" class="button">Get your free <strong>BrokerCheck</strong></a></p>
+          <p class="brokercheck-intro__cta"><a href="#brokercheck-form" class="button">Request a <strong>Broker<em>Check</em></strong> report now</a></p>
         </div>
         <figure class="report-preview" aria-roledescription="Sample BrokerCheck report preview">
           <div class="report-preview__viewport">
@@ -499,7 +508,7 @@ html { scroll-behavior: smooth; }
         </figure>
       </div>
       <h2 class="divider" id="how-it-works">How it works</h2>
-      <p>Bloomsbury’s <strong>BrokerCheck</strong> is straightforward. No meetings, no lengthy questionnaires. All we need is your portfolio statement – Our qualified advisers and accredited investment fiduciaries will take care of the rest.</p>
+      <p>Bloomsbury’s <strong>Broker<em>Check</em></strong> is straightforward. No meetings, no lengthy questionnaires. All we need is your portfolio statement. Our qualified advisers and accredited investment fiduciaries will take care of the rest.</p>
       <div class="process-diagram process-diagram--strip">
         <details class="process-strip-card">
           <summary class="process-strip-card__summary">
@@ -530,7 +539,7 @@ html { scroll-behavior: smooth; }
         </details>
       </div>
       <!-- end process-diagram -->
-      <h2 id="brokercheck-form" class="brokercheck-form-heading">Get your free <strong>BrokerCheck</strong> report</h2>
+      <h2 id="brokercheck-form" class="brokercheck-form-heading">Get your free <strong>Broker<em>Check</em></strong> report</h2>
       <form action="/cgi-bin/formmail.php" method="post">
         <input type="hidden" name="recipient" value="philip.stevenson@bloomsbury.co.nz,alison@webweaver.co.nz,lauren.teague@bloomsbury.co.nz" />
         <input type="hidden" name="subject" value="Bloomsbury initial consultation enquiry" />
@@ -574,12 +583,12 @@ html { scroll-behavior: smooth; }
           <!-- Google reCAPTCHA -->
           <div class="g-recaptcha" data-sitekey="6LfNOIUsAAAAANgssRDluMl8zn-4inff8ImW1fdA"></div>
           <br/>
-          <button type="submit">Request your free <strong>BrokerCheck</strong></button>
+          <button type="submit">Request your free <strong>Broker<em>Check</em></strong></button>
           <!-- end submit-row -->
         </fieldset>
             <p>Free · Confidential · No obligation</p>
 
-<p class="disclaimer"><small><em>Bloomsbury Associates reserves the right to refrain from providing a <strong>BrokerCheck</strong> report. If a <strong>BrokerCheck</strong> report is provided, we endeavour to produce it in 2-3 weeks, however reports may take longer based on availability.</em></small></p>
+<p class="disclaimer"><small><em>Bloomsbury Associates reserves the right to refrain from providing a <strong>Broker<em>Check</em></strong> report. If a <strong>Broker<em>Check</em></strong> report is provided, we endeavour to produce it in 2-3 weeks, however reports may take longer based on availability.</em></small></p>
       </form>
     </div>
     <!-- end content-col --> 
