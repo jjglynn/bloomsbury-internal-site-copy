@@ -97,15 +97,116 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 /* Tighter intro: less gap between bullet list / top CTA and “How it works” */
-#content-wrapper .col.content-col > ul:first-of-type {
-  margin-bottom: 0.25em;
+#content-wrapper .brokercheck-intro__text > ul:first-of-type {
+  margin: 0 0 0.25em;
 }
-#content-wrapper .col.content-col > ul:first-of-type + p {
-  margin-top: 0.15em;
+#content-wrapper .brokercheck-intro + p {
+  margin-top: 0.25em;
   margin-bottom: 0.35em;
 }
 #content-wrapper h2#how-it-works {
   margin-top: 0.5rem;
+}
+
+/* Intro layout: copy on the left, sample-report preview on the right */
+#content-wrapper .brokercheck-intro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.4rem;
+  align-items: flex-start;
+  margin: 0 0 0.35rem;
+}
+#content-wrapper .brokercheck-intro__text {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+/* Report preview carousel */
+#content-wrapper .report-preview {
+  flex: 0 0 auto;
+  width: 200px;
+  max-width: 100%;
+}
+#content-wrapper .report-preview__viewport {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #032048;
+  background: #fff;
+  aspect-ratio: 1 / 1.414;
+}
+#content-wrapper .report-preview__track {
+  display: flex;
+  width: 200%;
+  height: 100%;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+#content-wrapper .report-preview__slide {
+  flex: 0 0 50%;
+  width: 50%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+#content-wrapper .report-preview__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(3, 32, 72, 0.8);
+  color: #fff;
+  font: 700 1rem/1 Arial, sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+#content-wrapper .report-preview__nav:hover,
+#content-wrapper .report-preview__nav:focus {
+  background: #FF6600;
+  outline: none;
+}
+#content-wrapper .report-preview__nav--prev { left: 4px; }
+#content-wrapper .report-preview__nav--next { right: 4px; }
+#content-wrapper .report-preview__dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 6px 0 0;
+  padding: 0;
+}
+#content-wrapper .report-preview__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(3, 32, 72, 0.3);
+  padding: 0;
+  cursor: pointer;
+}
+#content-wrapper .report-preview__dot[aria-current="true"] { background: #FF6600; }
+#content-wrapper .report-preview__caption {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: #032048;
+  text-align: center;
+  font-style: italic;
+}
+@media (max-width: 600px) {
+  #content-wrapper .brokercheck-intro { gap: 0.6rem; }
+  #content-wrapper .report-preview {
+    order: 2;
+    width: 160px;
+    margin: 0.25rem auto 0;
+  }
 }
 
 /* Form block heading: same page hierarchy as other h2, no divider rule */
@@ -354,14 +455,33 @@ html { scroll-behavior: smooth; }
       <h1>BrokerCheck</h1>
       <p class="tagline">Get your free personalised report from Bloomsbury’s qualified advisers and accredited fiduciaries</p>
       <p>Upload your broker statement and we'll go through it properly – fees, performance, diversification, tax structure, and any signs that the portfolio has been built around the broker's interests rather than yours. No appointment needed, no obligation, and no charge.</p>
-      <ul>
-        <li>Reviewed by qualified, CEFEX-certified advisers.</li>
-        <li>We are independent – we don’t earn from trading and don’t take commissions.</li>
-        <li>Free, detailed analysis – tailored for you.</li>
-        <li>No obligation now or in the future.</li>
-        <li>Plain-English report.</li>
-        <li>Completely confidential.</li>
-      </ul>
+      <div class="brokercheck-intro">
+        <div class="brokercheck-intro__text">
+          <ul>
+            <li>Reviewed by qualified, CEFEX-certified advisers.</li>
+            <li>We are independent – we don’t earn from trading and don’t take commissions.</li>
+            <li>Free, detailed analysis – tailored for you.</li>
+            <li>No obligation now or in the future.</li>
+            <li>Plain-English report.</li>
+            <li>Completely confidential.</li>
+          </ul>
+        </div>
+        <figure class="report-preview" aria-roledescription="Sample BrokerCheck report preview">
+          <div class="report-preview__viewport">
+            <div class="report-preview__track" data-track>
+              <img class="report-preview__slide" src="file:///C:/Users/JoelGlynn/OneDrive%20-%20Bloomsbury%20Associates/Documents/Cursor%20Project%20Files/marketing-site-prototype/site-duplicate/img/brokercheck-report-cover.png" alt="BrokerCheck sample report cover page – click to see inside" data-slide="0" />
+              <img class="report-preview__slide" src="file:///C:/Users/JoelGlynn/OneDrive%20-%20Bloomsbury%20Associates/Documents/Cursor%20Project%20Files/marketing-site-prototype/site-duplicate/img/brokercheck-report-quickread.png" alt="BrokerCheck sample ‘quick read’ summary page" data-slide="1" />
+            </div>
+            <button class="report-preview__nav report-preview__nav--prev" type="button" aria-label="Previous page">&#x2039;</button>
+            <button class="report-preview__nav report-preview__nav--next" type="button" aria-label="Next page">&#x203A;</button>
+          </div>
+          <div class="report-preview__dots" role="tablist" aria-label="Sample pages">
+            <button type="button" class="report-preview__dot" role="tab" aria-label="Show cover page" data-go="0"></button>
+            <button type="button" class="report-preview__dot" role="tab" aria-label="Show summary page" data-go="1"></button>
+          </div>
+          <figcaption class="report-preview__caption" data-caption>Sample report cover – click to see inside</figcaption>
+        </figure>
+      </div>
       <p><a href="#brokercheck-form" class="button">Get your free BrokerCheck</a></p>
       <h2 class="divider" id="how-it-works">How it works</h2>
       <p>Bloomsbury’s BrokerCheck is straightforward. No meetings, no lengthy questionnaires. All we need is your portfolio statement – Our qualified advisers and accredited investment fiduciaries will take care of the rest.</p>
@@ -527,6 +647,45 @@ document.addEventListener('click', function (e) {
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   history.replaceState(null, '', '#' + id);
 });
+
+(function () {
+  var preview = document.querySelector('.report-preview');
+  if (!preview) return;
+  var track = preview.querySelector('[data-track]');
+  var slides = preview.querySelectorAll('.report-preview__slide');
+  var dots = preview.querySelectorAll('.report-preview__dot');
+  var caption = preview.querySelector('[data-caption]');
+  var prev = preview.querySelector('.report-preview__nav--prev');
+  var next = preview.querySelector('.report-preview__nav--next');
+  var captions = [
+    'Sample report cover – click to see inside',
+    'Inside: a plain-English summary'
+  ];
+  var count = slides.length;
+  if (!track || count === 0) return;
+  var idx = 0;
+  function go(i) {
+    idx = (i + count) % count;
+    track.style.transform = 'translateX(-' + (idx * (100 / count)) + '%)';
+    dots.forEach(function (d, j) {
+      d.setAttribute('aria-current', j === idx ? 'true' : 'false');
+    });
+    if (caption) caption.textContent = captions[idx] || '';
+  }
+  slides.forEach(function (s) {
+    s.addEventListener('click', function () { go(idx + 1); });
+  });
+  dots.forEach(function (d) {
+    d.addEventListener('click', function () { go(Number(d.getAttribute('data-go')) || 0); });
+  });
+  if (prev) prev.addEventListener('click', function () { go(idx - 1); });
+  if (next) next.addEventListener('click', function () { go(idx + 1); });
+  preview.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
+  });
+  go(0);
+})();
 </script>
 </body>
 </html>
