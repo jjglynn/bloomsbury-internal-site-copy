@@ -98,11 +98,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 /* Tighter intro: less gap between bullet list / top CTA and “How it works” */
 #content-wrapper .brokercheck-intro__text > ul:first-of-type {
-  margin: 0 0 0.25em;
+  margin: 0 0 0;
 }
-#content-wrapper .brokercheck-intro + p {
-  margin-top: 0.25em;
-  margin-bottom: 0.35em;
+#content-wrapper .brokercheck-intro__cta {
+  margin: 0;
 }
 #content-wrapper h2#how-it-works {
   margin-top: 0.5rem;
@@ -192,14 +191,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   cursor: pointer;
 }
 #content-wrapper .report-preview__dot[aria-current="true"] { background: #FF6600; }
-#content-wrapper .report-preview__caption {
-  margin: 4px 0 0;
-  font-size: 0.75rem;
-  line-height: 1.3;
-  color: #032048;
-  text-align: center;
-  font-style: italic;
-}
 @media (max-width: 600px) {
   #content-wrapper .brokercheck-intro { gap: 0.6rem; }
   #content-wrapper .report-preview {
@@ -465,12 +456,13 @@ html { scroll-behavior: smooth; }
             <li>Plain-English report.</li>
             <li>Completely confidential.</li>
           </ul>
+          <p class="brokercheck-intro__cta"><a href="#brokercheck-form" class="button">Get your free BrokerCheck</a></p>
         </div>
         <figure class="report-preview" aria-roledescription="Sample BrokerCheck report preview">
           <div class="report-preview__viewport">
             <div class="report-preview__track" data-track>
-              <img class="report-preview__slide" src="file:///C:/Users/JoelGlynn/OneDrive%20-%20Bloomsbury%20Associates/Documents/Cursor%20Project%20Files/marketing-site-prototype/site-duplicate/img/brokercheck-report-cover.png" alt="BrokerCheck sample report cover page – click to see inside" data-slide="0" />
-              <img class="report-preview__slide" src="file:///C:/Users/JoelGlynn/OneDrive%20-%20Bloomsbury%20Associates/Documents/Cursor%20Project%20Files/marketing-site-prototype/site-duplicate/img/brokercheck-report-quickread.png" alt="BrokerCheck sample ‘quick read’ summary page" data-slide="1" />
+              <img class="report-preview__slide" src="img/brokercheck-report-cover.png" alt="BrokerCheck sample report cover page – click to see inside" data-slide="0" />
+              <img class="report-preview__slide" src="img/brokercheck-report-quickread.png" alt="BrokerCheck sample ‘quick read’ summary page" data-slide="1" />
             </div>
             <button class="report-preview__nav report-preview__nav--prev" type="button" aria-label="Previous page">&#x2039;</button>
             <button class="report-preview__nav report-preview__nav--next" type="button" aria-label="Next page">&#x203A;</button>
@@ -479,10 +471,8 @@ html { scroll-behavior: smooth; }
             <button type="button" class="report-preview__dot" role="tab" aria-label="Show cover page" data-go="0"></button>
             <button type="button" class="report-preview__dot" role="tab" aria-label="Show summary page" data-go="1"></button>
           </div>
-          <figcaption class="report-preview__caption" data-caption>Sample report cover – click to see inside</figcaption>
         </figure>
       </div>
-      <p><a href="#brokercheck-form" class="button">Get your free BrokerCheck</a></p>
       <h2 class="divider" id="how-it-works">How it works</h2>
       <p>Bloomsbury’s BrokerCheck is straightforward. No meetings, no lengthy questionnaires. All we need is your portfolio statement – Our qualified advisers and accredited investment fiduciaries will take care of the rest.</p>
       <div class="process-diagram process-diagram--strip">
@@ -654,13 +644,8 @@ document.addEventListener('click', function (e) {
   var track = preview.querySelector('[data-track]');
   var slides = preview.querySelectorAll('.report-preview__slide');
   var dots = preview.querySelectorAll('.report-preview__dot');
-  var caption = preview.querySelector('[data-caption]');
   var prev = preview.querySelector('.report-preview__nav--prev');
   var next = preview.querySelector('.report-preview__nav--next');
-  var captions = [
-    'Sample report cover – click to see inside',
-    'Inside: a plain-English summary'
-  ];
   var count = slides.length;
   if (!track || count === 0) return;
   var idx = 0;
@@ -670,7 +655,6 @@ document.addEventListener('click', function (e) {
     dots.forEach(function (d, j) {
       d.setAttribute('aria-current', j === idx ? 'true' : 'false');
     });
-    if (caption) caption.textContent = captions[idx] || '';
   }
   slides.forEach(function (s) {
     s.addEventListener('click', function () { go(idx + 1); });
