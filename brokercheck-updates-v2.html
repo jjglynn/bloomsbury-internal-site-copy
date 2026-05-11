@@ -461,8 +461,8 @@ html { scroll-behavior: smooth; }
         <figure class="report-preview" aria-roledescription="Sample BrokerCheck report preview">
           <div class="report-preview__viewport">
             <div class="report-preview__track" data-track>
-              <img class="report-preview__slide" src="img/brokercheck-report-cover.png" alt="BrokerCheck sample report cover page – click to see inside" data-slide="0" />
-              <img class="report-preview__slide" src="img/brokercheck-report-quickread.png" alt="BrokerCheck sample ‘quick read’ summary page" data-slide="1" />
+              <img class="report-preview__slide" data-rel-src="img/brokercheck-report-cover.png" alt="BrokerCheck sample report cover page – click to see inside" data-slide="0" />
+              <img class="report-preview__slide" data-rel-src="img/brokercheck-report-quickread.png" alt="BrokerCheck sample ‘quick read’ summary page" data-slide="1" />
             </div>
             <button class="report-preview__nav report-preview__nav--prev" type="button" aria-label="Previous page">&#x2039;</button>
             <button class="report-preview__nav report-preview__nav--next" type="button" aria-label="Next page">&#x203A;</button>
@@ -622,6 +622,19 @@ html { scroll-behavior: smooth; }
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <script>
+// Resolve [data-rel-src] against the actual page URL, not <base href>.
+// Lets relative paths like "img/..." work locally and on GitHub Pages, while
+// the rest of the page can keep using <base> for production chrome.
+(function () {
+  var pageUrl = window.location.href.split('#')[0];
+  document.querySelectorAll('[data-rel-src]').forEach(function (el) {
+    var rel = el.getAttribute('data-rel-src');
+    if (!rel) return;
+    try { el.src = new URL(rel, pageUrl).href; }
+    catch (e) { el.src = rel; }
+  });
+})();
+
 // In-page anchor links would otherwise resolve against <base href> and navigate
 // off-page. Intercept them and scroll smoothly to the target on this page.
 document.addEventListener('click', function (e) {
