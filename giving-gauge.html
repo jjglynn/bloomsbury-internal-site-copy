@@ -8,6 +8,19 @@
 
 <head>
 <meta charset="utf-8">
+<script>
+/* xtest: same pattern as brokercheck-updates-v2.html — base for bloomsbury.co.nz tools/; GitHub Pages stays flat (no base). */
+(function (w) {
+  var github = /\.github\.io$/i.test(location.hostname || "");
+  if (!github) {
+    document.write('<base href="https://bloomsbury.co.nz/xtest2026/resources/tools/">');
+  }
+  w.__GG_ASSET_ROOT = github ? "web-resources/" : "../../web-resources/";
+  document.write('<link rel="stylesheet" href="' + w.__GG_ASSET_ROOT + 'css/html5reset.css" media="all">');
+  document.write('<link rel="stylesheet" href="' + w.__GG_ASSET_ROOT + 'css/bloomsbury.css" media="all">');
+  document.write('<link rel="stylesheet" href="' + w.__GG_ASSET_ROOT + 'slick/slick.css" media="all">');
+})(window);
+</script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-29614755-1"></script>
@@ -44,7 +57,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <title>The Giving Gauge : Tools : Resources : Bloomsbury Associates</title>
 <meta name="description" content="The Giving Gauge — explore illustrative charitable giving scenarios. A free tool from Bloomsbury Associates.">
 <meta name="author" content="Bloomsbury Associates">
-<link rel="canonical" href="https://bloomsbury.co.nz/xtest2026/resources/tools/thegiving-gauge.html" />
+<link rel="canonical" href="https://bloomsbury.co.nz/xtest2026/resources/tools/giving-gauge.html" />
 
 <!-- Icons -->
 
@@ -76,11 +89,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Stylesheets -->
-<link rel="stylesheet" href="../../web-resources/css/html5reset.css" media="all">
-<link rel="stylesheet" href="../../web-resources/css/bloomsbury.css" media="all">
-<link rel="stylesheet" href="../../web-resources/slick/slick.css" media="all">
 <style>
 .gg-embed-shell {
   margin: 1.25em 0 0;
@@ -239,19 +247,16 @@ body.gg-fs-active {
   border: 0;
   position: relative;
 }
-@media only screen and (min-width: 768px) {
-  .giving-gauge-full #content-wrapper .content-col {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
 </style>
 
-<!-- Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user's browser and adds them as classes to the body tag http://modernizr.com/ -->
-<script src="../../web-resources/js/modernizr-2.5.3-min.js"></script>
-<!-- Respond is a fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more) https://github.com/scottjehl/Respond -->
-<script src="../../web-resources/js/respond.min.js"></script>
+<!-- Modernizr / Respond (__GG_ASSET_ROOT set in head) -->
+<script>
+(function () {
+  var r = window.__GG_ASSET_ROOT;
+  document.write('<script src="' + r + 'js/modernizr-2.5.3-min.js"><\/script>');
+  document.write('<script src="' + r + 'js/respond.min.js"><\/script>');
+})();
+</script>
 </head>
 
 <body class="resourcessection videos giving-gauge-full">
@@ -269,7 +274,9 @@ body.gg-fs-active {
       <div class="section group">
         <div class="col logo">
           <h2 class="visuallyhidden">Bloomsbury Associates</h2>
-          <a href="../../index.html"><img src="../../web-resources/img/logo-bloomsbury.png" alt="Bloomsbury Associates" /></a> </div>
+          <a href="../../index.html"><img id="gg-site-logo" src="" alt="Bloomsbury Associates" /></a>
+          <script>document.getElementById("gg-site-logo").src = window.__GG_ASSET_ROOT + "img/logo-bloomsbury.png";</script>
+        </div>
         <!-- end col logo -->
         <div class="col main-nav-col">
           <div id="main-nav-wrapper"> <a class="menu-link" href="#menu">Menu</a>
@@ -353,6 +360,23 @@ body.gg-fs-active {
   </div>
   <!-- end header-wrapper -->
   <div id="content-wrapper" class="section group">
+    <div class="col subnav-col mobile-hide">
+      <h3><a href="../../resources.html">Resources</a></h3>
+      <ul>
+        <li><a href="../blog.html">Blog</a></li>
+        <li><a href="../newsletter.html">Newsletter</a></li>
+        <li><a href="../research.html">Research</a></li>
+        <li><a href="../tools.html">Tools</a>
+          <ul>
+            <li><a href="brokercheck.html"><strong>Broker<em>Check</em></strong></a></li>
+            <li><a class="current" href="giving-gauge.html">The Giving Gauge</a></li>
+          </ul>
+        </li>
+        <li><a href="../videos.html">Videos</a></li>
+      </ul>
+      <div id="quote"></div>
+    </div>
+    <!-- end subnav-col -->
     <div class="col content-col">
       <div class="breadcrumbs"><a href="../../index.html">Home</a> <a href="../../resources.html">Resources</a> <a href="../tools.html">Tools</a> The Giving Gauge</div>
       <h1>The Giving Gauge</h1>
@@ -426,11 +450,16 @@ body.gg-fs-active {
 	src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../resources/js/jquery-3.3.1.min.js"><\/script>')</script>
-<script src="../../web-resources/js/bjqs-1.3.js"></script>
-<script src="../../web-resources/slick/slick.min.js"></script>
-<script src="../../web-resources/js/actions.js"></script>
-<script src="../../web-resources/js/quotes3.js"></script>
+<script>window.jQuery || document.write('<script src="' + window.__GG_ASSET_ROOT + 'js/jquery-3.3.1.min.js"><\/script>')</script>
+<script>
+(function () {
+  var r = window.__GG_ASSET_ROOT;
+  document.write('<script src="' + r + 'js/bjqs-1.3.js"><\/script>');
+  document.write('<script src="' + r + 'slick/slick.min.js"><\/script>');
+  document.write('<script src="' + r + 'js/actions.js"><\/script>');
+  document.write('<script src="' + r + 'js/quotes3.js"><\/script>');
+})();
+</script>
 
 <!--[if (lt IE 9) & (!IEMobile)]>
 	<script src="../js/selectivizr-min.js"></script>
