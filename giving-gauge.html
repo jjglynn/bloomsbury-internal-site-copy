@@ -8,19 +8,7 @@
 
 <head>
 <meta charset="utf-8">
-<script>
-/* xtest: same pattern as brokercheck-updates-v2.html — base for bloomsbury.co.nz tools/; GitHub Pages stays flat (no base). */
-(function (w) {
-  var github = /\.github\.io$/i.test(location.hostname || "");
-  if (!github) {
-    document.write('<base href="https://bloomsbury.co.nz/xtest2026/resources/tools/">');
-  }
-  w.__GG_ASSET_ROOT = github ? "web-resources/" : "../../web-resources/";
-  document.write('<link rel="stylesheet" href="' + w.__GG_ASSET_ROOT + 'css/html5reset.css" media="all">');
-  document.write('<link rel="stylesheet" href="' + w.__GG_ASSET_ROOT + 'css/bloomsbury.css" media="all">');
-  document.write('<link rel="stylesheet" href="' + w.__GG_ASSET_ROOT + 'slick/slick.css" media="all">');
-})(window);
-</script>
+<base href="https://bloomsbury.co.nz/xtest2026/resources/tools/">
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-29614755-1"></script>
@@ -89,6 +77,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Stylesheets (same relative paths as brokercheck-updates-v2.html; resolved via base above) -->
+<link rel="stylesheet" href="../../web-resources/css/html5reset.css" media="all">
+<link rel="stylesheet" href="../../web-resources/css/bloomsbury.css" media="all">
+<link rel="stylesheet" href="../../web-resources/slick/slick.css" media="all">
 <style>
 .gg-embed-shell {
   margin: 1.25em 0 0;
@@ -249,14 +242,9 @@ body.gg-fs-active {
 }
 </style>
 
-<!-- Modernizr / Respond (__GG_ASSET_ROOT set in head) -->
-<script>
-(function () {
-  var r = window.__GG_ASSET_ROOT;
-  document.write('<script src="' + r + 'js/modernizr-2.5.3-min.js"><\/script>');
-  document.write('<script src="' + r + 'js/respond.min.js"><\/script>');
-})();
-</script>
+<!-- Modernizr / Respond -->
+<script src="../../web-resources/js/modernizr-2.5.3-min.js"></script>
+<script src="../../web-resources/js/respond.min.js"></script>
 </head>
 
 <body class="resourcessection videos giving-gauge-full">
@@ -274,8 +262,7 @@ body.gg-fs-active {
       <div class="section group">
         <div class="col logo">
           <h2 class="visuallyhidden">Bloomsbury Associates</h2>
-          <a href="../../index.html"><img id="gg-site-logo" src="" alt="Bloomsbury Associates" /></a>
-          <script>document.getElementById("gg-site-logo").src = window.__GG_ASSET_ROOT + "img/logo-bloomsbury.png";</script>
+          <a href="../../index.html"><img src="../../web-resources/img/logo-bloomsbury.png" alt="Bloomsbury Associates" /></a>
         </div>
         <!-- end col logo -->
         <div class="col main-nav-col">
@@ -450,16 +437,11 @@ body.gg-fs-active {
 	src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="' + window.__GG_ASSET_ROOT + 'js/jquery-3.3.1.min.js"><\/script>')</script>
-<script>
-(function () {
-  var r = window.__GG_ASSET_ROOT;
-  document.write('<script src="' + r + 'js/bjqs-1.3.js"><\/script>');
-  document.write('<script src="' + r + 'slick/slick.min.js"><\/script>');
-  document.write('<script src="' + r + 'js/actions.js"><\/script>');
-  document.write('<script src="' + r + 'js/quotes3.js"><\/script>');
-})();
-</script>
+<script>window.jQuery || document.write('<script src="../resources/js/jquery-3.3.1.min.js"><\/script>')</script>
+<script src="../../web-resources/js/bjqs-1.3.js"></script>
+<script src="../../web-resources/slick/slick.min.js"></script>
+<script src="../../web-resources/js/actions.js"></script>
+<script src="../../web-resources/js/quotes3.js"></script>
 
 <!--[if (lt IE 9) & (!IEMobile)]>
 	<script src="../js/selectivizr-min.js"></script>
