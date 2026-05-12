@@ -89,21 +89,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   padding-right: 0;
   margin-left: 0;
   text-indent: 0;
-  font-weight: 600;
+  font-weight: 400;
   font-style: italic;
-  font-size: 1.125em;
+  font-size: 1em;
   line-height: 1.35;
   color: #FF6600;
 }
-/* Same BrokerCheck treatment as elsewhere: bold Broker, italic Check (tagline is all-italic) */
+/* BrokerCheck wordmark: Check orange + italic (h1, body, subnav, breadcrumbs) */
+#content-wrapper strong em {
+  color: #FF6600;
+  font-style: italic;
+}
+/* Orange CTA buttons: keep Check same colour as surrounding label text */
+#content-wrapper a.button strong em,
+#content-wrapper form .submit-row button[type="submit"] strong em {
+  color: #fff;
+}
+#content-wrapper a.button:hover strong em,
+#content-wrapper form .submit-row button[type="submit"]:hover strong em {
+  color: inherit;
+}
+/* Tagline (orange paragraph): Broker dark blue; Check stays orange italic via rule above */
 #content-wrapper .col.content-col > p.tagline .brokercheck-mark {
   font-style: normal;
 }
 #content-wrapper .col.content-col > p.tagline .brokercheck-mark strong {
-  font-weight: 700;
-}
-#content-wrapper .col.content-col > p.tagline .brokercheck-mark em {
-  font-style: italic;
+  font-weight: 400;
+  color: #032048;
 }
 
 /* Tighter intro: less gap between bullet list / top CTA and “How it works” */

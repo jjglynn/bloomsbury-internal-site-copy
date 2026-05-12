@@ -148,12 +148,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     height: calc(100vh - 260px);
   }
 }
-/* Native fullscreen + overlay: CSS fallback; JS also sets pixel height (see bottom script) — vh is unreliable in fullscreen / mobile chrome */
+/* Native element fullscreen: stretch with fixed edges — vh/dvh can resolve to the pre-fullscreen
+   layout viewport in Chrome/Edge, leaving a black band under the shell. Do NOT use
+   @supports (-webkit-touch-callout: none) for iOS; that query is true in desktop Chrome too. */
 .gg-embed-shell:fullscreen,
 .gg-embed-shell:-webkit-full-screen,
 .gg-embed-shell:-moz-full-screen,
-.gg-embed-shell:-ms-fullscreen,
+.gg-embed-shell:-ms-fullscreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  min-height: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 12px 16px 16px;
+  overflow: hidden;
+}
+/* Overlay fallback (no Fullscreen API): viewport units + JS pixel sizing. */
 .gg-embed-shell.gg-expand-overlay {
+  position: fixed;
+  z-index: 2147483000;
+  right: auto;
+  bottom: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -166,31 +193,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   height: 100vh;
   max-height: none;
   padding: 12px 16px 16px;
-  overflow: hidden;
 }
 @supports (height: 100dvh) {
-  .gg-embed-shell:fullscreen,
-  .gg-embed-shell:-webkit-full-screen,
-  .gg-embed-shell:-moz-full-screen,
-  .gg-embed-shell:-ms-fullscreen,
   .gg-embed-shell.gg-expand-overlay {
     min-height: 100dvh;
     height: 100dvh;
   }
-}
-@supports (-webkit-touch-callout: none) {
-  .gg-embed-shell:fullscreen,
-  .gg-embed-shell:-webkit-full-screen,
-  .gg-embed-shell.gg-expand-overlay {
-    min-height: -webkit-fill-available;
-  }
-}
-.gg-embed-shell.gg-expand-overlay {
-  position: fixed;
-  z-index: 2147483000;
-  right: auto;
-  bottom: auto;
-  overflow: hidden;
 }
 body.gg-fs-active {
   overflow: hidden;
@@ -212,7 +220,9 @@ body.gg-fs-active {
   flex: 1 1 0%;
   min-height: 0;
   border: 1px solid #ccc;
-  display: block;
+  /* Flex column so the iframe gets a real flex height (abspos-only children can collapse). */
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 .gg-embed-shell:fullscreen .gg-embed-frame iframe,
@@ -220,16 +230,14 @@ body.gg-fs-active {
 .gg-embed-shell:-moz-full-screen .gg-embed-frame iframe,
 .gg-embed-shell:-ms-fullscreen .gg-embed-frame iframe,
 .gg-embed-shell.gg-expand-overlay .gg-embed-frame iframe {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  flex: 1 1 auto;
+  align-self: stretch;
   width: 100%;
   height: 100%;
   min-height: 0 !important;
   max-height: none !important;
   border: 0;
+  position: relative;
 }
 @media only screen and (min-width: 768px) {
   .giving-gauge-full #content-wrapper .content-col {
@@ -438,6 +446,8 @@ body.gg-fs-active {
   var popupMode = false;
   var dimsBound = false;
   var vv = window.visualViewport;
+  /** When non-null, shell was moved to document.body before native fullscreen (avoids #container / column constraints). */
+  var shellStash = null;
 
   function fsEl() {
     return document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement || document.mozFullScreenElement;
@@ -457,14 +467,50 @@ body.gg-fs-active {
     });
   }
 
+  function stashShellForFullscreen() {
+    if (shellStash !== null) return;
+    shellStash = { parent: shell.parentNode, next: shell.nextSibling };
+    document.body.appendChild(shell);
+  }
+
+  function restoreShellFromStash() {
+    if (!shellStash) return;
+    var p = shellStash.parent;
+    var n = shellStash.next;
+    shellStash = null;
+    try {
+      if (p && p.nodeType === 1) {
+        if (n && n.parentNode === p) p.insertBefore(shell, n);
+        else p.appendChild(shell);
+      }
+    } catch (e) { /* ignore */ }
+  }
+
   function applyShellDims() {
     if (!isExpanded()) return;
-    var h = window.innerHeight;
-    var w = window.innerWidth;
-    if (vv) {
-      h = Math.max(1, Math.round(vv.height));
-      w = Math.max(1, Math.round(vv.width));
+    /* Native element fullscreen: pixel height from innerHeight/vv/rect often lags or matches the
+       pre-fullscreen viewport, which caps the shell and leaves a short iframe. Rely on CSS 100dvh/100vh. */
+    if (isNativeFs()) {
+      ['height', 'min-height', 'max-height', 'width', 'min-width', 'max-width', 'top', 'left'].forEach(function (prop) {
+        shell.style.removeProperty(prop);
+      });
+      return;
     }
+    var innerW = window.innerWidth;
+    var innerH = window.innerHeight;
+    var w = Math.max(1, innerW);
+    var h = Math.max(1, innerH);
+    if (vv) {
+      w = Math.max(w, Math.round(vv.width));
+      h = Math.max(h, Math.round(vv.height));
+    }
+    try {
+      var r = shell.getBoundingClientRect();
+      var rw = Math.round(r.width);
+      var rh = Math.round(r.height);
+      if (rw > 0) w = Math.max(w, rw);
+      if (rh > 0) h = Math.max(h, rh);
+    } catch (e) { /* ignore */ }
     shell.style.setProperty('height', h + 'px');
     shell.style.setProperty('min-height', h + 'px');
     shell.style.setProperty('max-height', 'none');
@@ -508,7 +554,14 @@ body.gg-fs-active {
 
   function scheduleApplyDims() {
     requestAnimationFrame(function () {
-      requestAnimationFrame(applyShellDims);
+      requestAnimationFrame(function () {
+        applyShellDims();
+        if (isNativeFs()) {
+          setTimeout(applyShellDims, 0);
+          setTimeout(applyShellDims, 50);
+          setTimeout(applyShellDims, 200);
+        }
+      });
     });
   }
 
@@ -516,6 +569,7 @@ body.gg-fs-active {
     leavePopup();
     unbindDimsWhileExpanded();
     clearShellDims();
+    restoreShellFromStash();
   }
 
   function syncButtons() {
@@ -563,12 +617,14 @@ body.gg-fs-active {
 
   enter.addEventListener('click', function () {
     if (isExpanded()) return;
+    stashShellForFullscreen();
     requestNative().then(function () {
       bindDimsWhileExpanded();
       scheduleApplyDims();
       syncButtons();
       exit.focus();
     }).catch(function () {
+      restoreShellFromStash();
       enterPopup();
     });
   });
