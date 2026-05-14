@@ -83,17 +83,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="../../web-resources/css/bloomsbury.css" media="all">
 <link rel="stylesheet" href="../../web-resources/slick/slick.css" media="all">
 <style>
-/* Align tagline with h1 and body copy (.tagline uses padding: 0 0.8em in bloomsbury.css) */
+/* Page title: proper casing (BrokerCheck), not all-caps from site chrome */
+#content-wrapper .col.content-col > h1 {
+  text-transform: none;
+  font-variant: normal;
+}
+
+/* Tagline: navy body; BrokerCheck is bold with Check italic + orange (see strong em rule below) */
 #content-wrapper .col.content-col > p.tagline {
   padding-left: 0;
   padding-right: 0;
   margin-left: 0;
   text-indent: 0;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   font-size: 1em;
   line-height: 1.35;
-  color: #FF6600;
+  color: #032048;
+}
+#content-wrapper .col.content-col > p.tagline strong {
+  font-weight: 700;
 }
 /* BrokerCheck wordmark: Check orange + italic (h1, body, subnav, breadcrumbs) */
 #content-wrapper strong em {
@@ -109,15 +118,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 #content-wrapper form .submit-row button[type="submit"]:hover strong em {
   color: inherit;
 }
-/* Tagline (orange paragraph): Broker dark blue; Check stays orange italic via rule above */
-#content-wrapper .col.content-col > p.tagline .brokercheck-mark {
-  font-style: normal;
-}
-#content-wrapper .col.content-col > p.tagline .brokercheck-mark strong {
-  font-weight: 400;
-  color: #032048;
-}
-
 /* Tighter intro: less gap between bullet list / top CTA and “How it works” */
 #content-wrapper .brokercheck-intro__text > ul:first-of-type {
   margin: 0 0 0;
@@ -127,6 +127,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 #content-wrapper h2#how-it-works {
   margin-top: 0.5rem;
+  text-transform: none !important;
+  font-variant: normal;
 }
 
 /* Intro layout: copy on the left, sample-report preview on the right */
@@ -213,6 +215,99 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   cursor: pointer;
 }
 #content-wrapper .report-preview__dot[aria-current="true"] { background: #FF6600; }
+
+/* Lightbox: enlarged sample report for legible text */
+#report-preview-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  background: rgba(3, 32, 72, 0.88);
+  cursor: zoom-out;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+#report-preview-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+#report-preview-lightbox__inner {
+  position: relative;
+  max-width: min(96vw, 1200px);
+  max-height: 92vh;
+  margin: 0;
+  cursor: default;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border: 2px solid #E8E8E8;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+#report-preview-lightbox__inner img {
+  display: block;
+  max-width: min(96vw, 1200px);
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+#report-preview-lightbox__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(3, 32, 72, 0.92);
+  color: #fff;
+  font: 700 1.35rem/1 Arial, sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  z-index: 2;
+}
+#report-preview-lightbox__close:hover,
+#report-preview-lightbox__close:focus {
+  background: #FF6600;
+  outline: none;
+}
+.report-preview-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(3, 32, 72, 0.85);
+  color: #fff;
+  font: 700 1.25rem/1 Arial, sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 2;
+}
+.report-preview-lightbox__nav:hover,
+.report-preview-lightbox__nav:focus {
+  background: #FF6600;
+  outline: none;
+}
+.report-preview-lightbox__nav--prev { left: 10px; }
+.report-preview-lightbox__nav--next { right: 10px; }
+
 @media (max-width: 600px) {
   #content-wrapper .brokercheck-intro { gap: 0.6rem; }
   #content-wrapper .report-preview {
@@ -227,6 +322,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   border-bottom: none;
   box-shadow: none;
   padding-bottom: 0;
+  text-transform: none !important;
+  font-variant: normal;
 }
 
 /* Match bloomsbury.css form .submit-row input styling for <button type="submit"> */
@@ -479,7 +576,7 @@ html { scroll-behavior: smooth; }
         <li><a href="../tools.html">Tools</a>
           <ul>
             <li><a class="current" href="brokercheck.html"><strong>Broker<em>Check</em></strong></a></li>
-            <li><a href="thegiving-gauge.html">The Giving Gauge</a></li>
+            <li><a href="giving-gauge.html">The Giving Gauge</a></li>
           </ul>
         </li>
         <li><a href="../videos.html">Videos</a></li>
@@ -491,7 +588,7 @@ html { scroll-behavior: smooth; }
     <div class="col content-col">
       <div class="breadcrumbs"><a href="../../index.html">Home</a> <a href="../../resources.html">Resources</a> <a href="../tools.html">Tools</a> <strong>Broker<em>Check</em></strong></div>
       <h1><strong>Broker<em>Check</em></strong></h1>
-      <p class="tagline">Bloomsbury’s <span class="brokercheck-mark"><strong>Broker<em>Check</em></strong></span> is a free portfolio analysis report for brokerage clients, prepared for you by Accredited Investment Fiduciaries (AIF©)</p>
+      <p class="tagline">Bloomsbury’s <strong>Broker<em>Check</em></strong> is a free portfolio analysis report for brokerage clients, prepared for you by Accredited Investment Fiduciaries (AIF©)</p>
       <p>Upload your broker statement and we'll go through it properly – fees, performance, diversification, tax structure, and any signs that the portfolio has been built around the broker's interests rather than yours. No appointment needed, no obligation [to act], and no charge.</p>
       <div class="brokercheck-intro">
         <div class="brokercheck-intro__text">
@@ -507,8 +604,8 @@ html { scroll-behavior: smooth; }
         <figure class="report-preview" aria-roledescription="Sample BrokerCheck report preview">
           <div class="report-preview__viewport">
             <div class="report-preview__track" data-track>
-              <img class="report-preview__slide" data-rel-src="img/brokercheck-report-cover.png" alt="BrokerCheck sample report cover page – click to see inside" data-slide="0" />
-              <img class="report-preview__slide" data-rel-src="img/brokercheck-report-quickread.png" alt="BrokerCheck sample ‘quick read’ summary page" data-slide="1" />
+              <img class="report-preview__slide" data-rel-src="img/brokercheck-report-cover.png" alt="BrokerCheck sample report cover page – click to enlarge" data-slide="0" />
+              <img class="report-preview__slide" data-rel-src="img/brokercheck-report-quickread.png" alt="BrokerCheck sample ‘quick read’ summary page – click to enlarge" data-slide="1" />
             </div>
             <button class="report-preview__nav report-preview__nav--prev" type="button" aria-label="Previous page">&#x2039;</button>
             <button class="report-preview__nav report-preview__nav--next" type="button" aria-label="Next page">&#x203A;</button>
@@ -519,7 +616,15 @@ html { scroll-behavior: smooth; }
           </div>
         </figure>
       </div>
-      <h2 class="divider" id="how-it-works">How it works</h2>
+      <div id="report-preview-lightbox" class="report-preview-lightbox-root" role="dialog" aria-modal="true" aria-label="Enlarged sample report" aria-hidden="true">
+        <div id="report-preview-lightbox__inner">
+          <button type="button" id="report-preview-lightbox__close" aria-label="Close enlarged preview">&times;</button>
+          <button type="button" id="report-preview-lightbox__prev" class="report-preview-lightbox__nav report-preview-lightbox__nav--prev" aria-label="Previous sample page">&#x2039;</button>
+          <button type="button" id="report-preview-lightbox__next" class="report-preview-lightbox__nav report-preview-lightbox__nav--next" aria-label="Next sample page">&#x203A;</button>
+          <img id="report-preview-lightbox__img" src="" alt="" />
+        </div>
+      </div>
+      <h2 class="divider" id="how-it-works">How It Works</h2>
       <p>Bloomsbury’s <strong>Broker<em>Check</em></strong> is straightforward. No meetings, no lengthy questionnaires. All we need is your portfolio statement. Our qualified advisers and accredited investment fiduciaries will take care of the rest.</p>
       <div class="process-diagram process-diagram--strip">
         <details class="process-strip-card">
@@ -551,7 +656,7 @@ html { scroll-behavior: smooth; }
         </details>
       </div>
       <!-- end process-diagram -->
-      <h2 id="brokercheck-form" class="brokercheck-form-heading">Get your free <strong>Broker<em>Check</em></strong> report</h2>
+      <h2 id="brokercheck-form" class="brokercheck-form-heading">Get Your Free <strong>Broker<em>Check</em></strong> Report</h2>
       <form action="/cgi-bin/formmail.php" method="post">
         <input type="hidden" name="recipient" value="philip.stevenson@bloomsbury.co.nz,alison@webweaver.co.nz,lauren.teague@bloomsbury.co.nz" />
         <input type="hidden" name="subject" value="Bloomsbury initial consultation enquiry" />
@@ -705,18 +810,82 @@ document.addEventListener('click', function (e) {
   var dots = preview.querySelectorAll('.report-preview__dot');
   var prev = preview.querySelector('.report-preview__nav--prev');
   var next = preview.querySelector('.report-preview__nav--next');
+  var lightbox = document.getElementById('report-preview-lightbox');
+  var lightboxImg = document.getElementById('report-preview-lightbox__img');
+  var lightboxClose = document.getElementById('report-preview-lightbox__close');
+  var lightboxInner = document.getElementById('report-preview-lightbox__inner');
+  var lightboxPrev = document.getElementById('report-preview-lightbox__prev');
+  var lightboxNext = document.getElementById('report-preview-lightbox__next');
   var count = slides.length;
   if (!track || count === 0) return;
   var idx = 0;
+  function refreshLightboxIfOpen() {
+    if (!lightbox || !lightboxImg || !lightbox.classList.contains('is-open')) return;
+    var s = slides[idx];
+    if (!s || !s.src) return;
+    lightboxImg.src = s.src;
+    lightboxImg.alt = s.getAttribute('alt') || 'Enlarged sample report page';
+  }
   function go(i) {
     idx = (i + count) % count;
     track.style.transform = 'translateX(-' + (idx * (100 / count)) + '%)';
     dots.forEach(function (d, j) {
       d.setAttribute('aria-current', j === idx ? 'true' : 'false');
     });
+    refreshLightboxIfOpen();
+  }
+  function openLightbox() {
+    if (!lightbox || !lightboxImg) return;
+    var s = slides[idx];
+    if (!s || !s.src) return;
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    refreshLightboxIfOpen();
+    if (lightboxClose) lightboxClose.focus();
+  }
+  function closeLightbox() {
+    if (!lightbox || !lightboxImg) return;
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.removeAttribute('src');
+    document.body.style.overflow = '';
   }
   slides.forEach(function (s) {
-    s.addEventListener('click', function () { go(idx + 1); });
+    s.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openLightbox();
+    });
+  });
+  if (lightbox) {
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+  if (lightboxClose) lightboxClose.addEventListener('click', function (e) { e.stopPropagation(); closeLightbox(); });
+  if (lightboxPrev) lightboxPrev.addEventListener('click', function (e) { e.stopPropagation(); go(idx - 1); });
+  if (lightboxNext) lightboxNext.addEventListener('click', function (e) { e.stopPropagation(); go(idx + 1); });
+  if (lightboxInner) {
+    lightboxInner.addEventListener('click', function (e) { e.stopPropagation(); });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox || !lightbox.classList.contains('is-open')) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeLightbox();
+      return;
+    }
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      go(idx - 1);
+      return;
+    }
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      go(idx + 1);
+      return;
+    }
   });
   dots.forEach(function (d) {
     d.addEventListener('click', function () { go(Number(d.getAttribute('data-go')) || 0); });
