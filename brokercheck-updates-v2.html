@@ -144,7 +144,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   min-width: 0;
 }
 
-/* Report preview carousel */
+/* Report preview: scrollable sample PDF + pop-out */
 #content-wrapper .report-preview {
   flex: 0 0 auto;
   width: 200px;
@@ -154,67 +154,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   position: relative;
   overflow: hidden;
   border: 1px solid #032048;
-  background: #fff;
+  background: #e8e8e8;
   aspect-ratio: 1 / 1.414;
 }
-#content-wrapper .report-preview__track {
-  display: flex;
-  width: 200%;
+#content-wrapper .report-preview__pdf {
+  display: block;
+  width: 100%;
   height: 100%;
-  transition: transform 0.35s ease;
-  will-change: transform;
-}
-#content-wrapper .report-preview__slide {
-  flex: 0 0 50%;
-  width: 50%;
-  height: 100%;
-  object-fit: contain;
+  border: 0;
   background: #fff;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-drag: none;
 }
-#content-wrapper .report-preview__nav {
+#content-wrapper .report-preview__popout {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 26px;
-  height: 26px;
+  right: 4px;
+  bottom: 4px;
+  z-index: 2;
+  margin: 0;
+  padding: 0.28rem 0.45rem;
   border: none;
-  border-radius: 50%;
-  background: rgba(3, 32, 72, 0.8);
+  border-radius: 3px;
+  background: rgba(3, 32, 72, 0.88);
   color: #fff;
-  font: 700 1rem/1 Arial, sans-serif;
+  font: 600 0.6875rem/1.2 Arial, sans-serif;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-#content-wrapper .report-preview__nav:hover,
-#content-wrapper .report-preview__nav:focus {
+#content-wrapper .report-preview__popout:hover,
+#content-wrapper .report-preview__popout:focus {
   background: #FF6600;
   outline: none;
 }
-#content-wrapper .report-preview__nav--prev { left: 4px; }
-#content-wrapper .report-preview__nav--next { right: 4px; }
-#content-wrapper .report-preview__dots {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin: 6px 0 0;
-  padding: 0;
-}
-#content-wrapper .report-preview__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(3, 32, 72, 0.3);
-  padding: 0;
-  cursor: pointer;
-}
-#content-wrapper .report-preview__dot[aria-current="true"] { background: #FF6600; }
 
 /* Lightbox: enlarged sample report for legible text */
 #report-preview-lightbox {
@@ -240,23 +209,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 #report-preview-lightbox__inner {
   position: relative;
-  max-width: min(96vw, 1200px);
+  width: min(96vw, 1200px);
+  height: min(92vh, 900px);
   max-height: 92vh;
   margin: 0;
   cursor: default;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   border: 2px solid #E8E8E8;
-  background: #fff;
+  background: #e8e8e8;
   border-radius: 4px;
   overflow: hidden;
 }
-#report-preview-lightbox__inner img {
+#report-preview-lightbox__pdf {
   display: block;
-  max-width: min(96vw, 1200px);
-  max-height: 92vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
 }
 #report-preview-lightbox__close {
   position: absolute;
@@ -275,38 +244,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   justify-content: center;
   padding: 0;
   line-height: 1;
-  z-index: 2;
+  z-index: 3;
 }
 #report-preview-lightbox__close:hover,
 #report-preview-lightbox__close:focus {
   background: #FF6600;
   outline: none;
 }
-.report-preview-lightbox__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(3, 32, 72, 0.85);
-  color: #fff;
-  font: 700 1.25rem/1 Arial, sans-serif;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  z-index: 2;
+#content-wrapper .report-preview__caption {
+  margin: 6px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: #032048;
+  text-align: center;
+  max-width: 200px;
 }
-.report-preview-lightbox__nav:hover,
-.report-preview-lightbox__nav:focus {
-  background: #FF6600;
-  outline: none;
-}
-.report-preview-lightbox__nav--prev { left: 10px; }
-.report-preview-lightbox__nav--next { right: 10px; }
 
 @media (max-width: 600px) {
   #content-wrapper .brokercheck-intro { gap: 0.6rem; }
@@ -601,27 +553,18 @@ html { scroll-behavior: smooth; }
           </ul>
           <p class="brokercheck-intro__cta"><a href="#brokercheck-form" class="button">Request a <strong>Broker<em>Check</em></strong> report now</a></p>
         </div>
-        <figure class="report-preview" aria-roledescription="Sample BrokerCheck report preview">
+        <figure class="report-preview" aria-label="Sample BrokerCheck report (PDF)">
           <div class="report-preview__viewport">
-            <div class="report-preview__track" data-track>
-              <img class="report-preview__slide" data-rel-src="img/brokercheck-report-cover.png" alt="BrokerCheck sample report cover page – click to enlarge" data-slide="0" />
-              <img class="report-preview__slide" data-rel-src="img/brokercheck-report-quickread.png" alt="BrokerCheck sample ‘quick read’ summary page – click to enlarge" data-slide="1" />
-            </div>
-            <button class="report-preview__nav report-preview__nav--prev" type="button" aria-label="Previous page">&#x2039;</button>
-            <button class="report-preview__nav report-preview__nav--next" type="button" aria-label="Next page">&#x203A;</button>
+            <iframe class="report-preview__pdf" data-rel-src="../../../brokercheck/BrokerCheck Report - Sample for website.pdf" title="Sample BrokerCheck report PDF (scroll to browse)"></iframe>
+            <button type="button" class="report-preview__popout" aria-label="Open sample report at full size">Full size</button>
           </div>
-          <div class="report-preview__dots" role="tablist" aria-label="Sample pages">
-            <button type="button" class="report-preview__dot" role="tab" aria-label="Show cover page" data-go="0"></button>
-            <button type="button" class="report-preview__dot" role="tab" aria-label="Show summary page" data-go="1"></button>
-          </div>
+          <figcaption class="report-preview__caption">Scroll the sample, or use <strong>Full size</strong> for a larger view.</figcaption>
         </figure>
       </div>
-      <div id="report-preview-lightbox" class="report-preview-lightbox-root" role="dialog" aria-modal="true" aria-label="Enlarged sample report" aria-hidden="true">
+      <div id="report-preview-lightbox" class="report-preview-lightbox-root" role="dialog" aria-modal="true" aria-label="Enlarged sample report PDF" aria-hidden="true">
         <div id="report-preview-lightbox__inner">
           <button type="button" id="report-preview-lightbox__close" aria-label="Close enlarged preview">&times;</button>
-          <button type="button" id="report-preview-lightbox__prev" class="report-preview-lightbox__nav report-preview-lightbox__nav--prev" aria-label="Previous sample page">&#x2039;</button>
-          <button type="button" id="report-preview-lightbox__next" class="report-preview-lightbox__nav report-preview-lightbox__nav--next" aria-label="Next sample page">&#x203A;</button>
-          <img id="report-preview-lightbox__img" src="" alt="" />
+          <iframe id="report-preview-lightbox__pdf" title="Sample BrokerCheck report PDF (scroll to browse)"></iframe>
         </div>
       </div>
       <h2 class="divider" id="how-it-works">How It Works</h2>
@@ -805,67 +748,43 @@ document.addEventListener('click', function (e) {
 (function () {
   var preview = document.querySelector('.report-preview');
   if (!preview) return;
-  var track = preview.querySelector('[data-track]');
-  var slides = preview.querySelectorAll('.report-preview__slide');
-  var dots = preview.querySelectorAll('.report-preview__dot');
-  var prev = preview.querySelector('.report-preview__nav--prev');
-  var next = preview.querySelector('.report-preview__nav--next');
+  var pdfFrame = preview.querySelector('.report-preview__pdf');
+  var popoutBtn = preview.querySelector('.report-preview__popout');
   var lightbox = document.getElementById('report-preview-lightbox');
-  var lightboxImg = document.getElementById('report-preview-lightbox__img');
+  var lightboxFrame = document.getElementById('report-preview-lightbox__pdf');
   var lightboxClose = document.getElementById('report-preview-lightbox__close');
   var lightboxInner = document.getElementById('report-preview-lightbox__inner');
-  var lightboxPrev = document.getElementById('report-preview-lightbox__prev');
-  var lightboxNext = document.getElementById('report-preview-lightbox__next');
-  var count = slides.length;
-  if (!track || count === 0) return;
-  var idx = 0;
-  function refreshLightboxIfOpen() {
-    if (!lightbox || !lightboxImg || !lightbox.classList.contains('is-open')) return;
-    var s = slides[idx];
-    if (!s || !s.src) return;
-    lightboxImg.src = s.src;
-    lightboxImg.alt = s.getAttribute('alt') || 'Enlarged sample report page';
-  }
-  function go(i) {
-    idx = (i + count) % count;
-    track.style.transform = 'translateX(-' + (idx * (100 / count)) + '%)';
-    dots.forEach(function (d, j) {
-      d.setAttribute('aria-current', j === idx ? 'true' : 'false');
-    });
-    refreshLightboxIfOpen();
+  if (!pdfFrame || !lightbox || !lightboxFrame) return;
+  function pdfUrl() {
+    return (pdfFrame.getAttribute('src') || pdfFrame.src || '').trim();
   }
   function openLightbox() {
-    if (!lightbox || !lightboxImg) return;
-    var s = slides[idx];
-    if (!s || !s.src) return;
+    var url = pdfUrl();
+    if (!url) return;
+    lightboxFrame.src = url;
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    refreshLightboxIfOpen();
     if (lightboxClose) lightboxClose.focus();
   }
   function closeLightbox() {
-    if (!lightbox || !lightboxImg) return;
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
-    lightboxImg.removeAttribute('src');
+    lightboxFrame.removeAttribute('src');
     document.body.style.overflow = '';
   }
-  slides.forEach(function (s) {
-    s.addEventListener('click', function (e) {
-      e.preventDefault();
+  if (popoutBtn) {
+    popoutBtn.addEventListener('click', function (e) {
       e.stopPropagation();
       openLightbox();
     });
-  });
+  }
   if (lightbox) {
     lightbox.addEventListener('click', function (e) {
       if (e.target === lightbox) closeLightbox();
     });
   }
   if (lightboxClose) lightboxClose.addEventListener('click', function (e) { e.stopPropagation(); closeLightbox(); });
-  if (lightboxPrev) lightboxPrev.addEventListener('click', function (e) { e.stopPropagation(); go(idx - 1); });
-  if (lightboxNext) lightboxNext.addEventListener('click', function (e) { e.stopPropagation(); go(idx + 1); });
   if (lightboxInner) {
     lightboxInner.addEventListener('click', function (e) { e.stopPropagation(); });
   }
@@ -874,29 +793,8 @@ document.addEventListener('click', function (e) {
     if (e.key === 'Escape') {
       e.preventDefault();
       closeLightbox();
-      return;
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      go(idx - 1);
-      return;
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      go(idx + 1);
-      return;
     }
   });
-  dots.forEach(function (d) {
-    d.addEventListener('click', function () { go(Number(d.getAttribute('data-go')) || 0); });
-  });
-  if (prev) prev.addEventListener('click', function () { go(idx - 1); });
-  if (next) next.addEventListener('click', function () { go(idx + 1); });
-  preview.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
-  });
-  go(0);
 })();
 </script>
 </body>
