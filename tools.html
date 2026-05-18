@@ -87,6 +87,108 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="../web-resources/js/modernizr-2.5.3-min.js"></script>
 <!-- Respond is a fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more) https://github.com/scottjehl/Respond -->
 <script src="../web-resources/js/respond.min.js"></script>
+<style>
+#content-wrapper .process-diagram .step,
+#content-wrapper .step-brokercheck {
+  position: relative;
+  padding: 0.75em 1em 0.65em;
+}
+#content-wrapper .tool-step-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  margin-bottom: 0.5em;
+}
+#content-wrapper .tool-step-head .tool-step-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  flex-shrink: 0;
+}
+#content-wrapper .tool-step-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#content-wrapper .tool-step-titles {
+  flex: 1;
+  min-width: 0;
+}
+#content-wrapper .tool-step-num {
+  margin: 0 0 0.15em;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #EE6809;
+  line-height: 1.2;
+}
+#content-wrapper .tool-step-titles h3 {
+  margin: 0;
+  line-height: 1.25;
+}
+#content-wrapper .process-diagram .step > p,
+#content-wrapper .step-brokercheck > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#content-wrapper .tool-step-titles h3 a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(238, 104, 9, 0.35);
+}
+#content-wrapper .tool-step-titles h3 a:hover,
+#content-wrapper .tool-step-titles h3 a:focus {
+  color: #EE6809;
+  border-bottom-color: #EE6809;
+}
+#content-wrapper .tool-badge {
+  display: inline-block;
+  font-size: 0.62em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #032048;
+  background: #E8E8E8;
+  border: 1px solid #c5c5c5;
+  padding: 0.25em 0.55em;
+  margin-left: 0.4em;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+#content-wrapper .step--coming-soon .tool-step-titles h3 {
+  color: #555;
+}
+#content-wrapper .step--coming-soon .tool-step-head .tool-step-icon svg {
+  opacity: 0.5;
+}
+#content-wrapper .step--coming-soon p {
+  color: #666;
+}
+#content-wrapper .subnav-coming-soon {
+  color: #888;
+  font-style: italic;
+}
+#content-wrapper .step-brokercheck {
+  margin-top: 0.5em;
+}
+#content-wrapper .tool-step-titles h3 a strong {
+  font-weight: 700;
+}
+/* BrokerCheck wordmark: Check orange + italic (matches brokercheck-updates-v2) */
+#content-wrapper strong em {
+  color: #FF6600;
+  font-style: italic;
+}
+#content-wrapper .tool-step-titles h3 a:hover,
+#content-wrapper .tool-step-titles h3 a:focus {
+  color: inherit;
+  border-bottom-color: #EE6809;
+}
+#content-wrapper .tool-step-titles h3 a:hover strong em,
+#content-wrapper .tool-step-titles h3 a:focus strong em {
+  color: #FF6600;
+}
+</style>
 </head>
 
 <body class="resourcessection tools">
@@ -198,10 +300,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <li><a href="research.html">Research</a></li>
         <li><a class="current" href="tools.html">Tools</a>
           <ul>
-            <li><a href="tools/brokercheck.html">BrokerCheck</a></li>
+            <li><a href="tools/brokercheck.html"><strong>Broker<em>Check</em></strong></a></li>
             <li><a href="tools/giving-gauge.html">The Giving Gauge</a></li>
-            <li><a href="tools/charity-scout.html">Charity Scout</a></li>
-            <li><a href="tools/donor-portfolio.html">Donor Portfolio</a></li>
+            <li><span class="subnav-coming-soon">Charity Scout (coming soon)</span></li>
+            <li><span class="subnav-coming-soon">Donor Portfolio (coming soon)</span></li>
           </ul>
         </li>
         <li><a href="videos.html">Videos</a></li>
@@ -215,29 +317,70 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h1>Tools</h1>
       <p>Bloomsbury offers free online tools to help New Zealanders think clearly about money and giving. Each tool is illustrative only — not personal financial advice. If you would like tailored guidance, <a href="../contact/consultation.html">book a free initial consultation</a>.</p>
 
-      <h2 class="divider" id="philanthropic-giving">Philanthropic giving — three steps</h2>
-      <p>For donors who want to give with confidence, we have built a simple pathway: understand what you can afford to give, find charities that fit your values, then shape a portfolio of gifts you can track over time.</p>
+      <h2 class="divider" id="philanthropic-giving">Philanthropic giving — three connected tools</h2>
+      <p>For donors who want to give with confidence, we have built three connected tools: understand what you can afford to give, find charities that fit your values, then shape a portfolio of gifts you can track over time.</p>
 
       <div class="process-diagram">
         <div class="step step1">
-          <h2>Step 1</h2>
-          <h3><a href="tools/giving-gauge.html">The Giving Gauge</a></h3>
+          <div class="tool-step-head">
+            <div class="tool-step-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <title>Giving capacity gauge</title>
+                <path d="M12 44 A28 28 0 0 1 52 44" fill="none" stroke="#E8E8E8" stroke-width="6" stroke-linecap="round"/>
+                <path d="M12 44 A28 28 0 0 1 52 44" fill="none" stroke="#FF6600" stroke-width="6" stroke-linecap="round" stroke-dasharray="44 88"/>
+                <circle cx="32" cy="44" r="4" fill="#032048"/>
+                <line x1="32" y1="44" x2="46" y2="26" stroke="#032048" stroke-width="3" stroke-linecap="round"/>
+                <line x1="18" y1="50" x2="46" y2="50" stroke="#032048" stroke-width="2" opacity="0.25"/>
+                <line x1="32" y1="50" x2="32" y2="46" stroke="#032048" stroke-width="2" opacity="0.35"/>
+              </svg>
+            </div>
+            <div class="tool-step-titles">
+              <p class="tool-step-num">Step 1</p>
+              <h3><a href="tools/giving-gauge.html">The Giving Gauge</a></h3>
+            </div>
+          </div>
           <p>Enter a few details about your situation and see an indicative sustainable annual donation — with a projection of how giving might look through retirement. Takes around five minutes.</p>
-          <p><a href="tools/giving-gauge.html" class="button">Open the Giving Gauge</a></p>
         </div>
         <!-- end step1 -->
-        <div class="step step2">
-          <h2>Step 2</h2>
-          <h3><a href="tools/charity-scout.html">Charity Scout</a></h3>
+        <div class="step step2 step--coming-soon">
+          <div class="tool-step-head">
+            <div class="tool-step-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <title>Charity register search</title>
+                <circle cx="28" cy="28" r="14" fill="none" stroke="#032048" stroke-width="3"/>
+                <line x1="38" y1="38" x2="50" y2="50" stroke="#FF6600" stroke-width="4" stroke-linecap="round"/>
+                <rect x="18" y="22" width="20" height="3" rx="1" fill="#032048" opacity="0.35"/>
+                <rect x="18" y="28" width="14" height="3" rx="1" fill="#032048" opacity="0.25"/>
+                <rect x="18" y="34" width="17" height="3" rx="1" fill="#032048" opacity="0.25"/>
+                <path d="M44 14 L50 14 L50 20 L44 20 Z" fill="none" stroke="#FF6600" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="tool-step-titles">
+              <p class="tool-step-num">Step 2</p>
+              <h3>Charity Scout <span class="tool-badge">Coming soon</span></h3>
+            </div>
+          </div>
           <p>Search the New Zealand Charities Register by name, purpose, and where charities operate. Compare organisations and bookmark the ones you want to explore further.</p>
-          <p><a href="tools/charity-scout.html" class="button">Open Charity Scout</a></p>
         </div>
         <!-- end step2 -->
-        <div class="step step3">
-          <h2>Step 3</h2>
-          <h3><a href="tools/donor-portfolio.html">Donor Portfolio</a></h3>
+        <div class="step step3 step--coming-soon">
+          <div class="tool-step-head">
+            <div class="tool-step-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <title>Charitable portfolio allocation</title>
+                <circle cx="32" cy="32" r="22" fill="#E8E8E8" stroke="#032048" stroke-width="2"/>
+                <path d="M32 32 L32 10 A22 22 0 0 1 52 28 Z" fill="#032048"/>
+                <path d="M32 32 L52 28 A22 22 0 0 1 14 38 Z" fill="#FF6600"/>
+                <path d="M32 32 L14 38 A22 22 0 0 1 32 10 Z" fill="#fff" stroke="#032048" stroke-width="1"/>
+                <circle cx="32" cy="32" r="4" fill="#032048"/>
+              </svg>
+            </div>
+            <div class="tool-step-titles">
+              <p class="tool-step-num">Step 3</p>
+              <h3>Donor Portfolio <span class="tool-badge">Coming soon</span></h3>
+            </div>
+          </div>
           <p>Build a charitable portfolio with dollar amounts on each cause, then see allocation-style charts by charity, sector, and New Zealand vs overseas focus.</p>
-          <p><a href="tools/donor-portfolio.html" class="button">Open Donor Portfolio</a></p>
         </div>
         <!-- end step3 -->
       </div>
@@ -245,9 +388,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <p class="disclaimer">These tools use assumptions you enter and public register data. Results are for education and planning conversations only. They do not replace advice that takes account of your full circumstances.</p>
 
-      <h2 class="divider" id="brokercheck">BrokerCheck</h2>
-      <p>For investors with a sharebroker, <strong>Broker<em>Check</em></strong> is a free portfolio review from Bloomsbury’s accredited fiduciaries. Upload a recent broker statement and we will send you a plain-English report on fees, diversification, tax structure, and any conflicts of interest worth knowing about.</p>
-      <p><a href="tools/brokercheck.html" class="button">Request a Broker<em>Check</em> report</a></p>
+      <div class="step step-brokercheck" id="brokercheck">
+        <div class="tool-step-head">
+          <div class="tool-step-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <title>Portfolio review</title>
+              <rect x="14" y="10" width="36" height="46" rx="3" fill="#fff" stroke="#032048" stroke-width="2.5"/>
+              <line x1="22" y1="22" x2="42" y2="22" stroke="#032048" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+              <line x1="22" y1="30" x2="38" y2="30" stroke="#032048" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+              <line x1="22" y1="38" x2="40" y2="38" stroke="#032048" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+              <circle cx="44" cy="44" r="12" fill="#FF6600"/>
+              <path d="M39 44 L42.5 47.5 L49 40" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="tool-step-titles">
+            <h3><a href="tools/brokercheck.html"><strong>Broker<em>Check</em></strong></a></h3>
+          </div>
+        </div>
+        <p>For investors with a sharebroker, <strong>Broker<em>Check</em></strong> is a free portfolio review from Bloomsbury’s accredited fiduciaries. Upload a recent broker statement and we will send you a plain-English report on fees, diversification, tax structure, and any conflicts of interest worth knowing about.</p>
+      </div>
     </div>
     <!-- end content-col -->
   </div>
